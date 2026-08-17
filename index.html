@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fbfaf6" />
+  <meta name="description" content="Pastel Smart Grocery mobile web app prototype" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Pastel Smart Grocery</title>
+</head>
+<body>
+  <div class="app-shell">
+    <main class="app">
+      <header class="status-row" aria-label="Demo status bar">
+        <span>5:42</span><span>▮▮▮ ◔ ▰</span>
+      </header>
+
+      <section id="homePage" class="page active" aria-labelledby="homeTitle">
+        <div class="page-head">
+          <div><h1 id="homeTitle">Home</h1><p>Good evening 👋</p></div>
+          <div class="head-actions">
+            <button class="icon-btn" type="button" aria-label="Notifications">🔔</button>
+            <button class="icon-btn" type="button" aria-label="Profile">👤</button>
+          </div>
+        </div>
+
+        <article class="action-card mint">
+          <div class="card-row">
+            <div class="icon-bubble">🛒</div>
+            <div class="grow"><div class="eyebrow green-text">Continue current list</div><div id="homeListSummary" class="card-title">8 items · est. $42.00</div></div>
+            <span class="chev">›</span>
+          </div>
+          <button class="cta green-btn go-page" data-page="listPage" type="button">Open list</button>
+        </article>
+
+        <article id="saveCard" class="action-card cream">
+          <div class="card-row align-start">
+            <div class="icon-bubble">🏷️</div>
+            <div class="grow"><div class="card-title">You can save <span class="green-text">$6.20</span> without reducing your selected nutrients</div><div class="card-copy">Skip Greek yogurt this trip</div></div>
+            <span class="chev">›</span>
+          </div>
+          <div class="button-row">
+            <button id="applySaving" class="cta gold-btn grow" type="button">Apply saving</button>
+            <button class="secondary-btn go-page" data-page="budgetPage" type="button">Details</button>
+          </div>
+        </article>
+
+        <article class="action-card lav">
+          <div class="card-row align-start">
+            <div class="icon-bubble">🌿</div>
+            <div class="grow"><div id="gapTitle" class="card-title">Your list is still low in fiber</div><div id="gapCopy" class="card-copy">2 foods could improve it</div></div>
+            <span class="chev">›</span>
+          </div>
+          <button class="cta purple-btn go-page" data-page="nutritionPage" type="button">Fix it</button>
+        </article>
+
+        <article id="mealCard" class="action-card peach">
+          <div class="card-row align-start">
+            <div class="icon-bubble">🍲</div>
+            <div class="grow"><div id="mealOpportunityTitle" class="card-title">Add 1 item to complete chicken stir-fry</div><div id="mealOpportunityCopy" class="card-copy">Only bell peppers missing</div></div>
+            <span class="chev">›</span>
+          </div>
+          <button id="homeMealAction" class="cta coral-btn" type="button">Add item</button>
+        </article>
+
+        <section class="quick-section" aria-labelledby="quickActionsTitle">
+          <h2 id="quickActionsTitle">Quick actions</h2>
+          <div class="quick-grid">
+            <button id="quickAdd" class="quick" type="button"><span class="qicon green-text">⊕</span><span>Add item</span></button>
+            <button id="repeatLast" class="quick" type="button"><span class="qicon blue-text">↻</span><span>Repeat last list</span></button>
+            <button id="receipt" class="quick" type="button"><span class="qicon indigo-text">▣</span><span>Scan receipt</span></button>
+          </div>
+        </section>
+      </section>
+
+      <section id="listPage" class="page" aria-labelledby="listTitle">
+        <div class="page-head compact"><div><h1 id="listTitle">Shopping list</h1><p>One list powers every perspective.</p></div></div>
+        <div class="field-row">
+          <label class="sr-only" for="itemInput">Add shopping item</label>
+          <input id="itemInput" class="field" placeholder="What do you need?" />
+          <button id="itemAdd" class="add-square" type="button" aria-label="Add item">＋</button>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><strong id="itemCount">8</strong><span>items</span></div>
+          <div class="stat"><strong id="estTotal">$42.00</strong><span>estimate</span></div>
+          <div class="stat"><strong id="dealCount">4</strong><span>on deal</span></div>
+        </div>
+        <div id="listRows" class="list"></div>
+        <div id="listNotice" class="notice hidden" aria-live="polite"></div>
+      </section>
+
+      <section id="budgetPage" class="page" aria-labelledby="budgetTitle">
+        <div class="page-head compact"><div><h1 id="budgetTitle">Budget</h1><p>Spend less without weakening your nutrient goals.</p></div></div>
+        <article class="action-card mint budget-card">
+          <div class="budget-top">
+            <div><div class="label">Current basket</div><div id="budgetCurrent" class="budget-value">$42.00</div></div>
+            <div class="right"><div class="label">Target</div><div id="budgetTarget" class="budget-value">$50</div></div>
+          </div>
+          <label class="label" for="budgetRange">Adjust target</label>
+          <input id="budgetRange" class="slider" type="range" min="30" max="100" value="50" />
+          <div class="budget-edit">
+            <label><span class="label">Minimum</span><span class="budget-box"><span>$</span><input id="budgetMin" type="number" value="30" min="0" /></span></label>
+            <span class="dash">—</span>
+            <label><span class="label">Maximum</span><span class="budget-box"><span>$</span><input id="budgetMax" type="number" value="100" min="1" /></span></label>
+          </div>
+          <div id="budgetMessage" class="budget-message"></div>
+        </article>
+        <section class="subsection"><h2>Nutrients to preserve</h2><div id="budgetGoals" class="chip-wrap"></div></section>
+        <section class="subsection"><div class="section-line"><h2>What can be skipped</h2><span class="small-muted">Nutrition checked</span></div><div id="cutList"></div></section>
+      </section>
+
+      <section id="nutritionPage" class="page" aria-labelledby="nutritionTitle">
+        <div class="page-head compact"><div><h1 id="nutritionTitle">Nutrition</h1><p>Tell the app what your list is missing.</p></div></div>
+        <article class="action-card lav">
+          <div class="card-title small-title">What do you want more of?</div>
+          <div class="field-row top-space">
+            <label class="sr-only" for="nutInput">Add nutrient</label>
+            <input id="nutInput" class="field" placeholder="Fiber, iron, calcium…" />
+            <button id="nutAdd" class="add-square purple-square" type="button" aria-label="Add nutrient">＋</button>
+          </div>
+          <div id="goalWrap" class="chip-wrap top-space"></div>
+        </article>
+        <section class="subsection"><div class="section-line"><h2>Foods that will help</h2><span id="foodCount" class="small-muted"></span></div><div id="foodSuggestions" class="suggestion-list"></div></section>
+        <section class="subsection">
+          <h2>Quick choices</h2>
+          <div class="chip-wrap">
+            <button class="chip preset" data-n="Protein" type="button">Protein</button>
+            <button class="chip preset" data-n="Fiber" type="button">Fiber</button>
+            <button class="chip preset" data-n="Iron" type="button">Iron</button>
+            <button class="chip preset" data-n="Calcium" type="button">Calcium</button>
+            <button class="chip preset" data-n="Potassium" type="button">Potassium</button>
+            <button class="chip preset" data-n="Vitamin C" type="button">Vitamin C</button>
+            <button class="chip preset" data-n="B12" type="button">B12</button>
+          </div>
+        </section>
+      </section>
+
+      <section id="mealsPage" class="page" aria-labelledby="mealsTitle">
+        <div class="page-head compact"><div><h1 id="mealsTitle">Meals</h1><p>Find recipes and add only what is missing.</p></div></div>
+        <div class="field-row">
+          <label class="sr-only" for="recipeSearch">Search recipes</label>
+          <input id="recipeSearch" class="field" placeholder="Search recipes…" />
+          <button class="add-square coral-square" type="button" aria-label="Search recipes">⌕</button>
+        </div>
+        <div id="recipeList" class="recipe-list"></div>
+        <article class="action-card peach add-recipe-card">
+          <div class="card-title small-title">Add your own recipe</div>
+          <label class="sr-only" for="recipeName">Recipe name</label><input id="recipeName" class="field top-space" placeholder="Recipe name" />
+          <label class="sr-only" for="recipeIngredients">Recipe ingredients</label><textarea id="recipeIngredients" class="field top-space" rows="3" placeholder="Ingredients separated by commas"></textarea>
+          <button id="saveRecipe" class="cta coral-btn" type="button">Save recipe</button>
+        </article>
+      </section>
+
+      <div id="toast" class="toast" aria-live="polite"></div>
+      <div id="receiptSheet" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
+        <div class="sheet">
+          <div class="sheet-head"><strong id="receiptTitle">Scan receipt</strong><button id="closeSheet" class="remove" type="button" aria-label="Close">×</button></div>
+          <p>For the prototype, this simulates receipt ingestion. In production this would open the camera or file picker and send the image to OCR.</p>
+          <button id="fakeScan" class="cta green-btn" type="button">Simulate receipt scan</button>
+        </div>
+      </div>
+    </main>
+
+    <nav class="nav" aria-label="Main navigation">
+      <button class="nav-btn active" data-page="homePage" type="button"><span class="nicon">⌂</span><span>Home</span></button>
+      <button class="nav-btn" data-page="listPage" type="button"><span class="nicon">☷</span><span>List</span></button>
+      <button class="nav-btn" data-page="budgetPage" type="button"><span class="nicon">▣</span><span>Budget</span></button>
+      <button class="nav-btn" data-page="nutritionPage" type="button"><span class="nicon">●</span><span>Nutrition</span></button>
+      <button class="nav-btn" data-page="mealsPage" type="button"><span class="nicon">♨</span><span>Meals</span></button>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

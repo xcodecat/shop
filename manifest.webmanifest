@@ -1,0 +1,9 @@
+{
+  "name":"Pastel Smart Grocery",
+  "short_name":"Smart Grocery",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#fbfaf6",
+  "theme_color":"#fbfaf6",
+  "description":"Mobile-first grocery planning prototype with shared list, budget, nutrition and meal perspectives."
+}
